@@ -52,16 +52,21 @@ def extract_book_data_aladin():
 
     book_url = "https://www.aladin.co.kr/shop/common/wnew.aspx?ViewRowsCount=50&ViewType=Detail&SortOrder=6&page=0&BranchType=1&PublishDay=28&CID=351&NewType=SpecialNew&SearchOption="
     soup = parsing_beautifulsoup(book_url)
-    
-    upload_contents = ''
-    new_books = soup.select(".goodsTxtInfo")
-    url_prefix = "http://www.yes24.com"
 
-    for new_book in new_books:
-        book_name = new_book.select("a")[0].text
-        url_suffix = new_book.select("a")[1].attrs['href']
-        url = url_prefix + url_suffix
-        price = new_book.select(".priceB")[0].text
+    upload_contents = ''
+    new_books = soup.find_all('div', 'ss_book_list')
+
+    for i, new_book in enumerate(new_books):
+        if i % 2 != 0:
+            continue
+
+        try:
+            book_name = new_book.find('span', 'ss_f_g2').text.split(' - ')[1]
+        except AttributeError:
+            book_name = new_book.find('a', 'bo3').text
+
+        url = new_book.find('a', 'bo3').attrs['href']
+        price = new_book.find_all('span', {'class': ''})[-1].text
 
         content = f'<a href="{url}">' + book_name + '</a>' + ', ' + price + '<br/>\n'
         upload_contents += content
