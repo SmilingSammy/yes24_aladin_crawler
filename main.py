@@ -9,7 +9,7 @@ if __name__ == "__main__":
     
     ############## Setting
     access_token = os.environ['MY_GITHUB_TOKEN']
-    repository_name = "github-action-with-python"
+    repository_name = "yes24_aladin_crawler"
     
     ############## Timezone
     seoul_timezone = timezone('Asia/Seoul')
