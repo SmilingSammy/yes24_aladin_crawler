@@ -57,13 +57,14 @@ def extract_book_data_aladin():
     new_books = soup.find_all('div', 'ss_book_list')
 
     for i, new_book in enumerate(new_books):
-        if i % 2 != 0:
-            continue
 
         try:
-            book_name = new_book.find('span', 'ss_f_g2').text.split(' - ')[1]
+            book_name = new_book.find('a', 'bo3').text + new_book.find('span', 'ss_f_g2').text
         except AttributeError:
-            book_name = new_book.find('a', 'bo3').text
+            try:
+                book_name = new_book.find('a', 'bo3').text
+            except AttributeError:
+                continue
 
         url = new_book.find('a', 'bo3').attrs['href']
         price = new_book.find_all('span', {'class': ''})[-1].text
