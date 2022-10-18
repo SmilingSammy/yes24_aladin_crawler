@@ -1,7 +1,7 @@
 # Yes24,  Action with Python
 
 ## Info
-- 변성윤님 코드 사용
+- [변성윤님 코드](https://github.com/zzsza/github-action-with-python) 사용
 - 알라딘 최신 도서 수집 코드 추가
 
 ## Description
